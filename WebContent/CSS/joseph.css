@@ -1,0 +1,115 @@
+@CHARSET "UTF-8";
+
+h1 {
+	font-weight: bold;
+	margin-left: 70px;
+}
+
+body {
+	background-image: url('../img/timg.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	overflow: scroll; 
+}
+
+ol {
+	width: 120px;
+	height: 200px;
+	background-color: white;
+	margin-left: 70px;
+	margin-bottom: 30px;
+	margin-top: 0px;
+	overflow: scroll;
+}
+
+.text {
+	background-color: white;
+	width: 185px;
+	height: 35px;
+	margin-left:13px;
+	opacity: 1;
+}
+
+.text1 {
+	background-color: white;
+	width: 250px;
+	height: 35px;
+	margin-left: 28px;
+}
+
+.text2 {
+	background-color: white;
+	width: 250px;
+	height: 35px;
+	margin-left: 6px;
+}
+
+.button {
+	height: 40px;
+	width: 100px;
+	background: yellow;
+	margin-top: 30px;
+	margin-right: 35px;
+	float:right;
+}
+.button3 {
+	height: 40px;
+	width: 100px;
+	background: yellow;
+	margin-top: 30px;
+	margin-left: 60px;
+	float:left;
+}
+
+.button1 {
+	height: 40px;
+	width: 100px;
+	background: yellow;
+	margin-left: 10px;
+}
+
+.button2 {
+	height: 25px;
+	width: 90px;
+	background: #AFEEEE;
+}
+
+.kuang {
+	min-height: 570px;
+	width: 400px;
+	margin-top: 10px;
+	margin-left: 180px;
+	background-color: rgba(255, 255, 255, 0.3);
+	float: left;
+	border-width: 0.1px;
+	border-style: hide;
+	border-color: #AFEEEE;
+	padding: 20px;
+	overflow: hidden;  
+    resize: both; 
+}
+
+.lastOne {
+	font-weight: bold;
+	float: left;
+	padding-left: 100px;
+	padding-top: 300px;
+	font-size: 25px;
+}
+
+.menu {
+	background: white;
+	width: 100px;
+	height: 150px;
+	display: none;
+	margin-right: 70px;
+}
+input.error {         /* jQuery validate */
+	border: 2px solid red; 
+	color:red;
+}
+label.error {
+	color:red;
+	font-weight: bold;
+	padding-left:80px;
+}

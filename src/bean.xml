@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd     
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+      
+      <context:component-scan base-package="com.accenture.web.business" />
+      <context:component-scan base-package="com.accenture.web.dto" />
+      <context:component-scan base-package="com.accenture.web.exception" />
+      <context:component-scan base-package="com.accenture.web.reflection" />
+      <context:component-scan base-package="com.accenture.web.service" />
+      <context:component-scan base-package="com.accenture.web.servlet" />
+    
+       <bean id="JosephObject" class="com.accenture.web.dto.JosephObject">
+      </bean>
+    
+      <bean id="JosephCircle" class="com.accenture.web.dto.JosephCircleRequest">
+       <property name="josephCircleReq" ref="JosephObject"/>
+      </bean>
+      
+       <bean id="JosephBusiness" class="com.accenture.web.business.impl.JosephBusiness">
+        <property name="josephCircleRequest" ref ="JosephCircle"/>
+        <property name="josephCircleResponse" ref="JosephCircleResponse"/>
+       </bean>
+       
+          <!-- services -->
+
+    <bean id="JosephService" class="com.accenture.web.service.JosephService">
+        <property name="joseph" ref ="JosephObject"/>
+        <property name="josephBus" ref ="JosephBusiness"/>
+        <!-- additional collaborators and configuration for this bean go here -->
+    </bean>
+
+</beans>
