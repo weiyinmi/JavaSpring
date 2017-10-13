@@ -24,13 +24,7 @@ function insertPeople() { // Insert a person
 	var a = $("#info").val();
 	var li = document.createElement('li');
 	li.innerText = a;
-	console.log('Select ' + $("#selected").text() + ' in insertPeople');
 	$("#selected").before(li);
-	/*
-	 * $("#insert").click(function() { console.log('Select ' +
-	 * $("#selected").text() + ' in event'); $("#selected").before(li);
-	 * console.log("Insert "+li.innerText + + ' in event'); });
-	 */
 	$(".menu").css("display", "none");
 
 	console.log("Insert " + li.innerText + +' in insertPeople');
@@ -125,6 +119,15 @@ function setEmpty()
 	$("#info").val("");
 };
 
+function returnErrors(field,errors,textId,errorId,message,data){
+	
+	if($.inArray(field,errors)!=-1){		
+		 $(textId).css("border","2px solid #ff0080 ");
+		 $(errorId).css("color","#ff0080").html('<p>'+message+ data + '</p>');	
+	}
+};
+
+
 function calc() {
 
 /*	// ($("#istart").val().search(/^[0-9]*[1-9][0-9]*$/) == -1) // from 1
@@ -216,19 +219,11 @@ function calc() {
 				
 				for(var i=0; i<length; i++){
 					errors[i]=data1.errors[i].field ;					
-				}			
-				if($.inArray("circle.start",errors)!=-1){
-					 $("#istart").css("border","2px solid #ff0080 ");
-					 $("#last").css("color","#ff0080").html('<p>'+data1.errors[0].message + '</p>');
 				}
-				if($.inArray("circle.interval",errors)!=-1){
-					 $("#iinterval").css("border","2px solid #ff0080 ");
-					 $("#last").css("color","#ff0080").html('<p>'+data1.errors[0].message + '</p>');
-				}
-				if($.inArray("circle.persons",errors)!=-1){
-					 $("#ipersons").css("border","2px solid #ff0080 ");
-					 $("#last").css("color","#ff0080").html('<p>'+data1.errors[0].message + '</p>');
-				}
+				returnErrors("circle.start",errors,"#istart","#error1","Start:",data1.errors[0].message);
+				returnErrors("circle.interval",errors,"#iinterval","#error2","Interval:",data1.errors[0].message);
+				returnErrors("circle.persons",errors,"ol","#error3","Peoples:",data1.errors[0].message);
+				
 			    console.log(errors);
 			}			
 		}

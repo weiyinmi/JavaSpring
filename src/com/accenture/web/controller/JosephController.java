@@ -37,9 +37,11 @@ public class JosephController {
 
 			List<FieldError> errorList = result.getFieldErrors();			
 			List<JosephErrorMessage> stringErr = new ArrayList<>();
-
+			JosephErrorMessage josephErrorMessage =null;
+			
 			for (FieldError fieldError : errorList) {
-				JosephErrorMessage josephErrorMessage = new JosephErrorMessage();
+				
+				josephErrorMessage = new JosephErrorMessage();
 				josephErrorMessage.setField(fieldError.getField());
 				josephErrorMessage.setMessage(fieldError.getDefaultMessage());
 				stringErr.add(josephErrorMessage);
