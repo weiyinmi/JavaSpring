@@ -25,19 +25,24 @@ public class JosephServiceImpl implements JosephService {
 	 * @return true or throw exception
 	 * @throws NumberFormatException
 	 */
-/*	public boolean validateInput(List<String> list, String start, String interval) {
-		
-		int intStart;
-		int intInterval;
-		try {
-			intStart = Integer.parseInt(start);
-			intInterval = Integer.parseInt(interval);
+	/*
+	 * public boolean validateInput(List<String> list, String start, String
+	 * interval) {
+	 * 
+	 * int intStart; int intInterval; try { intStart = Integer.parseInt(start);
+	 * intInterval = Integer.parseInt(interval);
+	 * 
+	 * } catch (NumberFormatException e) { throw new
+	 * IllegalArgumentException(ILLEGAL_INPUT, e); } if (intStart > 0) { if
+	 * (intInterval >= 0) { return true; } else { throw new
+	 * IllegalArgumentException(INTERVAL_EXCEPTION); } } else { throw new
+	 * IllegalArgumentException(START_EXCEPTION); } }
+	 */
 
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(ILLEGAL_INPUT, e);
-		}
-		if (intStart > 0) {
-			if (intInterval >= 0) {
+	public boolean validateInput(List<String> list, Integer start, Integer interval) {
+
+		if (start > 0) {
+			if (interval >= 0) {
 				return true;
 			} else {
 				throw new IllegalArgumentException(INTERVAL_EXCEPTION);
@@ -45,7 +50,7 @@ public class JosephServiceImpl implements JosephService {
 		} else {
 			throw new IllegalArgumentException(START_EXCEPTION);
 		}
-	}*/
+	}
 
 	/**
 	 * Achieve joseph problem,when josephFunction is working, peoples would be
@@ -61,7 +66,8 @@ public class JosephServiceImpl implements JosephService {
 	 * @throws IllegalArgumentException
 	 */
 	public String josephFunction(List<String> list, Integer start, Integer interval) {
-	
+
+		if (validateInput(list, start, interval)) {
 			int a = start - 1; // index
 			while (list.size() > 1) {
 				a = a + interval;
@@ -72,8 +78,8 @@ public class JosephServiceImpl implements JosephService {
 				} else {
 					list.remove(a);
 				}
-			}		
+			}
+		}
 		return list.get(0);
-
 	}
 }

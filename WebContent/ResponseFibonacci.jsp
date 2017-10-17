@@ -3,6 +3,7 @@
 
 <%@ page import="java.util.*"%>
 <%@ page import="java.math.BigInteger"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,19 +12,13 @@
 </head>
 <body>
 
-	<%
-		/*  List<BigInteger> list=(List<BigInteger>) request.getAttribute("sequence"); */
-		List<BigInteger> list = (List<BigInteger>) session.getAttribute("sequence");
-
-		out.println("The Fibonacci sequence is: ");
-		out.println(" <ul>");
-		for (int i = 0; i < list.size(); i++) {			
-			out.println("<li>" + list.get(i) + "</li>");			
-		}
-		out.println("</ul>");
-	%>
-	<%-- 
-	<%=list %> --%>
+	<c:out value="The Fibonacci sequence is:" />
+	<br />
+	<ul>
+		<c:forEach var="item" items="${sequence }">
+			<li><c:out value="${item}" /></li>
+		</c:forEach>
+	</ul>
 
 </body>
 </html>

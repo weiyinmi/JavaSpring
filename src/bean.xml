@@ -7,15 +7,7 @@
         http://www.springframework.org/schema/context/spring-context.xsd     
         http://www.springframework.org/schema/beans/spring-beans.xsd">
       
-      <context:component-scan base-package="com.accenture.web.business" />
-      <context:component-scan base-package="com.accenture.web.dto" />
-      <context:component-scan base-package="com.accenture.web.exception" />
-      <context:component-scan base-package="com.accenture.web.reflection" />
-      <context:component-scan base-package="com.accenture.web.service" />
-      <context:component-scan base-package="com.accenture.web.servlet" />
-    
-       <bean id="JosephObject" class="com.accenture.web.dto.JosephObject">
-      </bean>
+      <context:component-scan base-package="com.accenture.web" />
     
       <bean id="JosephCircle" class="com.accenture.web.dto.JosephCircleRequest">
        <property name="josephCircleReq" ref="JosephObject"/>

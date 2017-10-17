@@ -158,8 +158,8 @@ function calc() {
 					persons : peopleArr
 				};
 			} else {
-				alert("Peoples cann`t be null!");
-				console.log("Peoples cann`t be null!");
+				alert("Peoples cann't be null!");
+				console.log("Peoples cann't be null!");
 			}
 		} else {
 			alert("Interval shound be a non-negative integer !");
@@ -184,8 +184,8 @@ function calc() {
 			persons : peopleArr
 		};
 	} else {
-		alert("Peoples cann`t be null!");
-		console.log("Peoples cann`t be null!");
+		alert("Peoples cann't be null!");
+		console.log("Peoples cann't be null!");
 	}
 	
 	var josephObj = {

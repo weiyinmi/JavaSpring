@@ -30,34 +30,32 @@ public class JosephBusinessImpl implements JosephBusiness {
 
 		Integer start = josephCircleRequest.getCircle().getStart();
 		Integer interval = josephCircleRequest.getCircle().getInterval();
-		String[] arr = josephCircleRequest.getCircle().getPersons();
+		String[] peopleArr = josephCircleRequest.getCircle().getPersons();
 
-		List<String> list = new ArrayList<>();
+		List<String> peopleList = new ArrayList<>();
 
-		for (int i = 0; i < arr.length; i++) {
+		for (int i = 0; i < peopleArr.length; i++) {
 
-			list.add(arr[i]);
+			peopleList.add(peopleArr[i]);
 		}
 
 		JosephService josephService = new JosephServiceImpl();
-		String last = null;
+		String lastPerson = null;
 
 		// set service exception as inner exception
 		try {
 
-			last = josephService.josephFunction(list, start, interval);
+			lastPerson = josephService.josephFunction(peopleList, start, interval);
 
 		} catch (Exception e) {
 
 			throw new BusinessException(BUSINESS_EXCEPTION, e);
 
-		} finally {
-
 		}
 
 		JosephCircleResponse responsePeople = new JosephCircleResponse();
-		responsePeople.setLastPeople(last);
-		
+		responsePeople.setLastPeople(lastPerson);
+
 		return responsePeople;
 
 	}

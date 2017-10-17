@@ -31,32 +31,33 @@ public class JosephController {
 	public @ResponseBody JosephCircleResponse getLastPeople(@Valid @RequestBody JosephCircleRequest josephCircleRequest,
 			BindingResult result) {
 
-		if (result.hasErrors()) {
-
-			logger.error("Inputs are illegal!");
-
-			List<FieldError> errorList = result.getFieldErrors();			
-			List<JosephErrorMessage> stringErr = new ArrayList<>();
-			JosephErrorMessage josephErrorMessage =null;
-			
-			for (FieldError fieldError : errorList) {
-				
-				josephErrorMessage = new JosephErrorMessage();
-				josephErrorMessage.setField(fieldError.getField());
-				josephErrorMessage.setMessage(fieldError.getDefaultMessage());
-				stringErr.add(josephErrorMessage);
-				
-				logger.error("Error: " + fieldError.getField() + " " + fieldError.getDefaultMessage());
-			}
-	
-			josephCircleResponse = new JosephCircleResponse();
-			josephCircleResponse.setErrors(stringErr); // must new a object, or NullPointer														
-			josephCircleResponse.setLastPeople(null);
-
-			return josephCircleResponse;
-		}
-
 		try {
+			
+			if (result.hasErrors()) {
+
+				logger.error("Inputs are illegal!");
+
+				List<FieldError> errorList = result.getFieldErrors();
+				List<JosephErrorMessage> stringErr = new ArrayList<>();
+				JosephErrorMessage josephErrorMessage = null;
+
+				for (FieldError fieldError : errorList) {
+
+					josephErrorMessage = new JosephErrorMessage();
+					josephErrorMessage.setField(fieldError.getField());
+					josephErrorMessage.setMessage(fieldError.getDefaultMessage());
+					stringErr.add(josephErrorMessage);
+
+					logger.error("Error: " + fieldError.getField() + " " + fieldError.getDefaultMessage());
+				}
+
+				josephCircleResponse = new JosephCircleResponse();
+				josephCircleResponse.setErrors(stringErr); // must new a object,
+															// or NullPointer
+				josephCircleResponse.setLastPeople(null);
+
+//				return josephCircleResponse;
+			}
 
 			josephCircleResponse = josephBusiness.callJoseph(josephCircleRequest);
 			logger.info("Succeed  to run Joseph");
@@ -64,8 +65,6 @@ public class JosephController {
 		} catch (Exception e) {
 
 			logger.error("Failed to run Joseph", e);
-		} finally {
-
 		}
 
 		return josephCircleResponse;
