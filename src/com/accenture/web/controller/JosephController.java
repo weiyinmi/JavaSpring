@@ -56,7 +56,7 @@ public class JosephController {
 															// or NullPointer
 				josephCircleResponse.setLastPeople(null);
 
-//				return josephCircleResponse;
+				return josephCircleResponse;
 			}
 
 			josephCircleResponse = josephBusiness.callJoseph(josephCircleRequest);

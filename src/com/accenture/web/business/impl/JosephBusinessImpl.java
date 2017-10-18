@@ -30,14 +30,15 @@ public class JosephBusinessImpl implements JosephBusiness {
 
 		Integer start = josephCircleRequest.getCircle().getStart();
 		Integer interval = josephCircleRequest.getCircle().getInterval();
-		String[] peopleArr = josephCircleRequest.getCircle().getPersons();
+/*		String[] peopleArr = josephCircleRequest.getCircle().getPersons();
 
 		List<String> peopleList = new ArrayList<>();
 
 		for (int i = 0; i < peopleArr.length; i++) {
 
 			peopleList.add(peopleArr[i]);
-		}
+		}*/
+		List<String> peopleList = josephCircleRequest.getCircle().getPersons();
 
 		JosephService josephService = new JosephServiceImpl();
 		String lastPerson = null;
