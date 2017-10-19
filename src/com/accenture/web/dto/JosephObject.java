@@ -14,13 +14,13 @@ public class JosephObject extends DataTransferObject{
 	
 	@NotNull(message = "{data.null}")
 	@Min(value=1,message = "{data.min}")
-	@ListSizeLimitation(listFieldName="persons",message="{data.size.limitation}",limitedFieldName = "start")
+//	@ListSizeLimitation(listFieldName="persons",message="{data.size.limitation}",limitedFieldName = "start")
 //	@Digits(integer=9,fraction=0,message = "{JosephObject.data.digit}"
 	private Integer start;
 	
 	@NotNull(message = "{data.null}")
 	@Min(value=0,message = "{data.min}")
-	@ListSizeLimitation(listFieldName="persons",message="{data.size.limitation}",limitedFieldName = "interval")
+//	@ListSizeLimitation(listFieldName="persons",message="{data.size.limitation}",limitedFieldName = "interval")
 	private Integer interval;
 	
 	@NotEmpty(message = "{data.empty}")

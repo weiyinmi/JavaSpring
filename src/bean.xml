@@ -27,4 +27,9 @@
         <!-- additional collaborators and configuration for this bean go here -->
     </bean>
 
+		<!-- around method -->
+	<bean id="printTime" class="com.accenture.web.aop.PrintTime" >
+		<property name="mappedName" ref="JosephService" />
+	</bean>
+
 </beans>

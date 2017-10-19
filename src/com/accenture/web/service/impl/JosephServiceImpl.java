@@ -3,9 +3,12 @@ package com.accenture.web.service.impl;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Repository;
 
 import com.accenture.web.service.JosephService;
 
+@Repository 
 public class JosephServiceImpl implements JosephService {
 	private static final String START_EXCEPTION = "Start isn`t a positive integer!";
 	private static final String INTERVAL_EXCEPTION = "Interval isn`t a non-negative integer!";

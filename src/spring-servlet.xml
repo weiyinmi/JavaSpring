@@ -29,18 +29,6 @@
 
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	<bean id="printTime" class="com.accenture.web.aop.PrintTime" />
-	
-<!-- 	<bean id="JosephObject" class="com.accenture.web.dto.JosephObject"/>
-	<bean id="JosephCircle" class="com.accenture.web.dto.JosephCircleRequest">
-		<property name="josephObject" ref="JosephObject" />
-	</bean>
-	<bean id="JosephService" class="com.accenture.web.service.impl.JosephServiceImpl">
-		<property name="josephCircle" ref="JosephCircle" />	
-	</bean>
-	<bean id="JosephBusiness" class="com.accenture.web.business.impl.JosephBusinessImpl">
-		<property name="josephCircleResponse" ref="JosephCircleResponse" />
-		<property name="josephBuiness" ref="JosephService" />
-	</bean> -->
 
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
@@ -75,5 +63,5 @@
 		<property name="defaultEncoding" value="UTF-8" />
 		<property name="cacheSeconds" value="60" />
 	</bean>
-
+	
 </beans>
