@@ -15,22 +15,47 @@ import com.accenture.web.service.impl.JosephServiceImpl;
 public class PrintTime {
 
 	private static final Logger logger = Logger.getLogger(PrintTime.class);
-	public static final String POINT = "execution(* com.accenture.web.service.JosephService.josephFunction(..))";
+	public static final String SERVICE = "execution(* com.accenture.web.service.impl.JosephServiceImpl.*.*(..))";
+	public static final String BUSINESS = "execution(* com.accenture.web.bussiness.impl.JosephBusinessImpl.*.*(..))";
+	public static final String CONTROLLER = "execution(* com.accenture.web.service.JosephController.*.*(..))";
 
-	@Around("execution(* com.accenture.web.service.impl.JosephServiceImpl.*.*(..))")
-	public void timeAround(ProceedingJoinPoint joinPoint) throws Throwable {
+	@Around(SERVICE)
+	public Object timeAroundService(ProceedingJoinPoint joinPoint) throws Throwable {
 
 		long startTime = System.currentTimeMillis();
 		logger.info("startTime:" + startTime);
 		
-		Object object = joinPoint.proceed(joinPoint.getArgs());
+		Object object = joinPoint.proceed();
 
-		// Get method name
 		long endTime = System.currentTimeMillis();
-		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-		String methodName = signature.getDeclaringTypeName() + "." + signature.getName();
+		logger.info("endTime:" + endTime);
+		
+		return object;
+	}
+	
+	@Around(BUSINESS)
+	public Object timeAroundBusiness(ProceedingJoinPoint joinPoint) throws Throwable {
 
-		logger.info("methodName:" + methodName);
+		long startTime = System.currentTimeMillis();
+		logger.info("startTime:" + startTime);
+		
+		Object object = joinPoint.proceed();
+
+		long endTime = System.currentTimeMillis();
+		logger.info("endTime:" + endTime);
+		
+		return object;
+	}
+	
+	@Around(CONTROLLER)
+	public void timeAroundController(ProceedingJoinPoint joinPoint) throws Throwable {
+
+		long startTime = System.currentTimeMillis();
+		logger.info("startTime:" + startTime);
+		
+		Object object = joinPoint.proceed();
+
+		long endTime = System.currentTimeMillis();
 		logger.info("endTime:" + endTime);
 
 	}

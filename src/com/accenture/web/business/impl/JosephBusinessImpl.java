@@ -1,10 +1,8 @@
 package com.accenture.web.business.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.accenture.web.business.JosephBusiness;
 import com.accenture.web.dto.JosephCircleRequest;
@@ -17,7 +15,7 @@ public class JosephBusinessImpl implements JosephBusiness {
 
 	private static final String BUSINESS_EXCEPTION = "Business exception!";
 	Logger logger = Logger.getLogger(JosephBusinessImpl.class);
-	
+
 	/**
 	 * Call the Joseph function in service level,request the input data and
 	 * response the result,
@@ -31,17 +29,9 @@ public class JosephBusinessImpl implements JosephBusiness {
 
 		Integer start = josephCircleRequest.getCircle().getStart();
 		Integer interval = josephCircleRequest.getCircle().getInterval();
-/*		String[] peopleArr = josephCircleRequest.getCircle().getPersons();
-
-		List<String> peopleList = new ArrayList<>();
-
-		for (int i = 0; i < peopleArr.length; i++) {
-
-			peopleList.add(peopleArr[i]);
-		}*/
 		List<String> peopleList = josephCircleRequest.getCircle().getPersons();
 
-		JosephService josephService = new JosephServiceImpl();	
+		JosephService josephService = new JosephServiceImpl();
 		String lastPerson = null;
 
 		// set service exception as inner exception
