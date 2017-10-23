@@ -10,17 +10,17 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.accenture.web.validator.ListSizeLimitation;
 import com.accenture.web.validator.NoRepetitionList;
 
-public class JosephObject extends DataTransferObject{
+@ListSizeLimitation(listFieldName="persons",message="{data.size.limitation}",limitedFieldName = "start")
+@ListSizeLimitation(listFieldName="persons",message="{data.size.limitation}",limitedFieldName = "interval")
+public class JosephCircle extends DataTransferObject{
 	
 	@NotNull(message = "{data.null}")
 	@Min(value=1,message = "{data.min}")
-//	@ListSizeLimitation(listFieldName="persons",message="{data.size.limitation}",limitedFieldName = "start")
 //	@Digits(integer=9,fraction=0,message = "{JosephObject.data.digit}"
 	private Integer start;
 	
 	@NotNull(message = "{data.null}")
 	@Min(value=0,message = "{data.min}")
-//	@ListSizeLimitation(listFieldName="persons",message="{data.size.limitation}",limitedFieldName = "interval")
 	private Integer interval;
 	
 	@NotEmpty(message = "{data.empty}")

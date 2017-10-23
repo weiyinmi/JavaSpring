@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.accenture.web.business.JosephBusiness;
 import com.accenture.web.business.impl.JosephBusinessImpl;
-import com.accenture.web.dto.JosephCircleRequest;
-import com.accenture.web.dto.JosephCircleResponse;
+import com.accenture.web.dto.JosephRequest;
+import com.accenture.web.dto.JosephResponse;
 import com.accenture.web.dto.JosephErrorMessage;
 
 @Controller
@@ -24,15 +23,24 @@ public class JosephController {
 
 	private static final Logger logger = Logger.getLogger(JosephController.class);
 
-	JosephBusiness josephBusiness = new JosephBusinessImpl();
-	JosephCircleResponse josephCircleResponse = null;
+	JosephResponse josephCircleResponse = null;
+
+	private JosephBusinessImpl josephBusiness;
+
+	public JosephBusinessImpl getJosephBusiness() {
+		return josephBusiness;
+	}
+
+	public void setJosephBusiness(JosephBusinessImpl josephBusiness) {
+		this.josephBusiness = josephBusiness;
+	}
 
 	@RequestMapping("/JosephController")
-	public @ResponseBody JosephCircleResponse getLastPeople(@Valid @RequestBody JosephCircleRequest josephCircleRequest,
+	public @ResponseBody JosephResponse getLastPeople(@Valid @RequestBody JosephRequest josephCircleRequest,
 			BindingResult result) {
 
 		try {
-			
+
 			if (result.hasErrors()) {
 
 				logger.error("Inputs are illegal!");
@@ -51,7 +59,7 @@ public class JosephController {
 					logger.error("Error: " + fieldError.getField() + " " + fieldError.getDefaultMessage());
 				}
 
-				josephCircleResponse = new JosephCircleResponse();
+				josephCircleResponse = new JosephResponse();
 				josephCircleResponse.setErrors(stringErr); // must new a object,
 															// or NullPointer
 				josephCircleResponse.setLastPeople(null);

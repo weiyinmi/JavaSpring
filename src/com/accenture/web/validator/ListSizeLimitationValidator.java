@@ -14,60 +14,64 @@ import com.accenture.web.aop.PrintTime;
 public class ListSizeLimitationValidator implements ConstraintValidator<ListSizeLimitation, Object> {
 
 	private static final Logger logger = Logger.getLogger(PrintTime.class);
-	
-	private List<Integer> length;
-	private int maxSize;
+
+	private String limitedFieldName;
+	private String listFieldName;
 
 	@Override
 	public void initialize(ListSizeLimitation listsize) {
-		listsize.limitedFieldName();
-		listsize.listFieldName();
+		limitedFieldName = listsize.limitedFieldName();
+		listFieldName = listsize.listFieldName();
 	}
 
 	@Override
 	public boolean isValid(Object object, ConstraintValidatorContext context) {
 
+		Integer fieldLength = 0;
+		int maxSize = 0;
+
 		Field[] fields = object.getClass().getDeclaredFields();
-		List<String> fieldList = new ArrayList<>();
-		length = new ArrayList<>();
 
 		for (Field field : fields) {
 
 			field.setAccessible(true);
-			fieldList.add(field.getName());
 
 			try {
-				if (Integer.class.isAssignableFrom(field.getType())) {
 
-					length.add((Integer) field.get(object));
+				if (field.getName().indexOf(limitedFieldName) != -1) {
+
+					fieldLength = (Integer) field.get(object);
 				}
 
-				if (List.class.isAssignableFrom(field.getType())) {
+				if (field.getName().indexOf(listFieldName) != -1) {
 					List<String> listPeo = new ArrayList<>();
 					listPeo = (List<String>) field.get(object);
 					maxSize = listPeo.size();
-
 				}
+
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 
-				logger.warn("Circle validate error:",e);
+				logger.warn("Circle validate error:", e);
+			} catch (NullPointerException e) {
+
+				logger.warn("Field cann't be null:", e);
 			}
 		}
+		if (fieldLength == null || maxSize == 0) {
 
-		if (length.get(0) > maxSize) {
-			context.disableDefaultConstraintViolation();
-			context.buildConstraintViolationWithTemplate("{start.validator.message}").addConstraintViolation();
-
-			return false;
-
-		} else if (length.get(1) > maxSize) {
-			context.disableDefaultConstraintViolation();
-			context.buildConstraintViolationWithTemplate("{interval.validator.message}").addConstraintViolation();
-
-			return false;
-
-		} else {
 			return true;
+		} else {
+
+			if (fieldLength > maxSize) {
+				context.disableDefaultConstraintViolation();
+				context.buildConstraintViolationWithTemplate("{data.size.limitation}").addPropertyNode(limitedFieldName)
+						.addConstraintViolation();
+
+				return false;
+			} else {
+				
+				return true;
+			}
 		}
 	}
 

@@ -2,7 +2,7 @@ package com.accenture.web.dto;
 
 import java.util.List;
 
-public class JosephCircleResponse extends  DataTransferObject{
+public class JosephResponse extends  DataTransferObject{
     private String lastPeople;
     private List<JosephErrorMessage> errors;
     

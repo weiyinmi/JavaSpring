@@ -33,4 +33,5 @@ public class JosephServiceImplTest {
 		list.add("w");
 		assertEquals("1",josephServiceImpl.josephFunction(list, 1, 3));
 	}
+	
 }
