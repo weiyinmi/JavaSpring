@@ -8,22 +8,20 @@ import com.accenture.web.business.JosephBusiness;
 import com.accenture.web.dto.JosephRequest;
 import com.accenture.web.dto.JosephResponse;
 import com.accenture.web.exception.BusinessException;
-import com.accenture.web.service.impl.JosephServiceImpl;
+import com.accenture.web.service.JosephService;
 
 public class JosephBusinessImpl implements JosephBusiness {
 
 	private static final String BUSINESS_EXCEPTION = "Business exception!";
 	Logger logger = Logger.getLogger(JosephBusinessImpl.class);
 
-	private JosephServiceImpl josephService;
-	
-	
-	public JosephServiceImpl getJosephService() {
+	private JosephService josephService;
+
+	public JosephService getJosephService() {
 		return josephService;
 	}
 
-
-	public void setJosephService(JosephServiceImpl josephService) {
+	public void setJosephService(JosephService josephService) {
 		this.josephService = josephService;
 	}
 
@@ -31,20 +29,19 @@ public class JosephBusinessImpl implements JosephBusiness {
 	 * Call the Joseph function in service level,request the input data and
 	 * response the result,
 	 * 
-	 * @param josephCircleRequest
+	 * @param josephRequest
 	 *            get the input for Joseph
 	 * @return responsePeople the last person
 	 * @throws BusinessException
 	 */
-	public JosephResponse callJoseph(JosephRequest josephCircleRequest) throws BusinessException {
+	public JosephResponse callJoseph(JosephRequest josephRequest) throws BusinessException {
 
-		Integer start = josephCircleRequest.getCircle().getStart();
-		Integer interval = josephCircleRequest.getCircle().getInterval();
-		List<String> peopleList = josephCircleRequest.getCircle().getPersons();
+		Integer start = josephRequest.getCircle().getStart();
+		Integer interval = josephRequest.getCircle().getInterval();
+		List<String> peopleList = josephRequest.getCircle().getPersons();
 
 		String lastPerson = null;
 
-		// set service exception as inner exception
 		try {
 
 			lastPerson = josephService.josephFunction(peopleList, start, interval);

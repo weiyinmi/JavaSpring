@@ -16,7 +16,6 @@ public class JosephCircle extends DataTransferObject{
 	
 	@NotNull(message = "{data.null}")
 	@Min(value=1,message = "{data.min}")
-//	@Digits(integer=9,fraction=0,message = "{JosephObject.data.digit}"
 	private Integer start;
 	
 	@NotNull(message = "{data.null}")

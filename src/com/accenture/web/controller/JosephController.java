@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.accenture.web.business.JosephBusiness;
 import com.accenture.web.business.impl.JosephBusinessImpl;
 import com.accenture.web.dto.JosephRequest;
 import com.accenture.web.dto.JosephResponse;
@@ -23,51 +24,50 @@ public class JosephController {
 
 	private static final Logger logger = Logger.getLogger(JosephController.class);
 
-	JosephResponse josephCircleResponse = null;
+	JosephResponse josephResponse = new JosephResponse();
 
-	private JosephBusinessImpl josephBusiness;
+	private JosephBusiness josephBusiness;
 
-	public JosephBusinessImpl getJosephBusiness() {
+	public JosephBusiness getJosephBusiness() {
 		return josephBusiness;
 	}
 
-	public void setJosephBusiness(JosephBusinessImpl josephBusiness) {
+	public void setJosephBusiness(JosephBusiness josephBusiness) {
 		this.josephBusiness = josephBusiness;
 	}
 
 	@RequestMapping("/JosephController")
-	public @ResponseBody JosephResponse getLastPeople(@Valid @RequestBody JosephRequest josephCircleRequest,
+	public @ResponseBody JosephResponse getLastPeople(@Valid @RequestBody JosephRequest josephRequest,
 			BindingResult result) {
+		
+		if (result.hasErrors()) {
 
-		try {
+			logger.error("Inputs are illegal!");
+			List<FieldError> errorList = result.getFieldErrors();
+			List<JosephErrorMessage> stringErr = new ArrayList<>();
+			JosephErrorMessage josephErrorMessage = null;
 
-			if (result.hasErrors()) {
+			for (FieldError fieldError : errorList) {
 
-				logger.error("Inputs are illegal!");
+				josephErrorMessage = new JosephErrorMessage();
+				josephErrorMessage.setField(fieldError.getField());
+				josephErrorMessage.setMessage(fieldError.getDefaultMessage());
+				stringErr.add(josephErrorMessage);
 
-				List<FieldError> errorList = result.getFieldErrors();
-				List<JosephErrorMessage> stringErr = new ArrayList<>();
-				JosephErrorMessage josephErrorMessage = null;
-
-				for (FieldError fieldError : errorList) {
-
-					josephErrorMessage = new JosephErrorMessage();
-					josephErrorMessage.setField(fieldError.getField());
-					josephErrorMessage.setMessage(fieldError.getDefaultMessage());
-					stringErr.add(josephErrorMessage);
-
-					logger.error("Error: " + fieldError.getField() + " " + fieldError.getDefaultMessage());
-				}
-
-				josephCircleResponse = new JosephResponse();
-				josephCircleResponse.setErrors(stringErr); // must new a object,
-															// or NullPointer
-				josephCircleResponse.setLastPeople(null);
-
-				return josephCircleResponse;
+				logger.error("Error: " + fieldError.getField() + " " + fieldError.getDefaultMessage());
 			}
 
-			josephCircleResponse = josephBusiness.callJoseph(josephCircleRequest);
+			josephResponse = new JosephResponse();
+			josephResponse.setErrors(stringErr); // must new a object,
+													// or NullPointer
+			josephResponse.setLastPeople(null);
+
+			return josephResponse;
+		}
+		
+		try {
+			
+			josephResponse = josephBusiness.callJoseph(josephRequest);
 			logger.info("Succeed  to run Joseph");
 
 		} catch (Exception e) {
@@ -75,6 +75,6 @@ public class JosephController {
 			logger.error("Failed to run Joseph", e);
 		}
 
-		return josephCircleResponse;
+		return josephResponse;
 	}
 }

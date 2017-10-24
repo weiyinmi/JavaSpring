@@ -69,7 +69,7 @@ public class ListSizeLimitationValidator implements ConstraintValidator<ListSize
 
 				return false;
 			} else {
-				
+
 				return true;
 			}
 		}
