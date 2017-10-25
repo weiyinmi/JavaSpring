@@ -15,14 +15,20 @@ public class NoRepetitionListValidator implements ConstraintValidator<NoRepetiti
 
 	@Override
 	public boolean isValid(List<String> personList, ConstraintValidatorContext arg1) {
-		HashSet<String> hashset = new HashSet<>();
-		for (String i : personList) {
-			hashset.add(i);
-		}
-		if (hashset.size() == personList.size()) {
-			return true;
+		
+		HashSet<String> hashset = new HashSet<>();		
+		if (personList != null) {
+			
+			for (String i : personList) {
+				hashset.add(i);
+			}
+			if (hashset.size() == personList.size()) {
+				return true;
+			} else {
+				return false;
+			}
 		} else {
-			return false;
+			return true;
 		}
 	}
 

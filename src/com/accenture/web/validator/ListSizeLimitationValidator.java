@@ -1,7 +1,6 @@
 package com.accenture.web.validator;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.ConstraintValidator;
@@ -24,6 +23,7 @@ public class ListSizeLimitationValidator implements ConstraintValidator<ListSize
 		listFieldName = listsize.listFieldName();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean isValid(Object object, ConstraintValidatorContext context) {
 
@@ -44,35 +44,35 @@ public class ListSizeLimitationValidator implements ConstraintValidator<ListSize
 				}
 
 				if (field.getName().indexOf(listFieldName) != -1) {
-					List<String> listPeo = new ArrayList<>();
+					List<String> listPeo;
 					listPeo = (List<String>) field.get(object);
-					maxSize = listPeo.size();
+
+					if (listPeo != null) {
+						maxSize = listPeo.size();
+					}
 				}
 
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 
 				logger.warn("Circle validate error:", e);
 			} catch (NullPointerException e) {
-
-				logger.warn("Field cann't be null:", e);
+				logger.warn("Field cann't be null!", e);
 			}
 		}
-		if (fieldLength == null || maxSize == 0) {
 
+		if (fieldLength == null) {
 			return true;
+		}
+
+		if (fieldLength > maxSize) {
+			context.disableDefaultConstraintViolation();
+			context.buildConstraintViolationWithTemplate("{data.size.limitation}").addPropertyNode(limitedFieldName)
+					.addConstraintViolation();
+
+			return false;
 		} else {
 
-			if (fieldLength > maxSize) {
-				context.disableDefaultConstraintViolation();
-				context.buildConstraintViolationWithTemplate("{data.size.limitation}").addPropertyNode(limitedFieldName)
-						.addConstraintViolation();
-
-				return false;
-			} else {
-
-				return true;
-			}
+			return true;
 		}
 	}
-
 }

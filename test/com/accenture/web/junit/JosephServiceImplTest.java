@@ -34,4 +34,16 @@ public class JosephServiceImplTest {
 		assertEquals("1",josephServiceImpl.josephFunction(list, 1, 3));
 	}
 	
+	@Test(expected = IllegalArgumentException.class)
+	public void testJosephFunctionIllegalValue() {
+		list.add("1");
+		list.add("a");
+		josephServiceImpl.josephFunction(list, -1, 3);
+	}
+	
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void testJosephFunctionListNull() {
+		josephServiceImpl.josephFunction(list,2, 3);
+	}
+	
 }

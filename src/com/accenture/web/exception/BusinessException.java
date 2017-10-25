@@ -5,7 +5,6 @@ package com.accenture.web.exception;
  */
 public class BusinessException extends Exception {
 
-
 	private static final long serialVersionUID = -4139860061860830465L;
 
 	public BusinessException() {
@@ -17,11 +16,11 @@ public class BusinessException extends Exception {
 	}
 
 	public BusinessException(String message, Throwable cause) {
-        super(message,cause);
+		super(message, cause);
 	}
 
 	public BusinessException(Throwable cause) {
-        super(cause);
+		super(cause);
 	}
 
 }

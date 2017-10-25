@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.accenture.web.service.JosephService;
 
-@Repository 
+@Repository
 public class JosephServiceImpl implements JosephService {
 	private static final String START_EXCEPTION = "Start isn`t a positive integer!";
 	private static final String INTERVAL_EXCEPTION = "Interval isn`t a non-negative integer!";
@@ -42,7 +42,11 @@ public class JosephServiceImpl implements JosephService {
 	 */
 
 	public boolean validateInput(List<String> list, Integer start, Integer interval) {
-
+		
+		if (list == null) {
+			throw new NullPointerException("null");
+		}
+		
 		if (start > 0) {
 			if (interval >= 0) {
 				return true;
@@ -52,6 +56,7 @@ public class JosephServiceImpl implements JosephService {
 		} else {
 			throw new IllegalArgumentException(START_EXCEPTION);
 		}
+
 	}
 
 	/**
